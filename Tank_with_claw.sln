@@ -3,6 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MainESP", "MainESP", "{FD0A6A6C-01BB-493B-84AF-1F55F7C8A657}"
+	ProjectSection(SolutionItems) = preProject
+		MainESP\MainESP.ino = MainESP\MainESP.ino
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemoteControl", "RemoteControl", "{D74E28D4-9EC7-4ACD-B3B2-45F938FAA15B}"
+	ProjectSection(SolutionItems) = preProject
+		RemoteControl\RemoteControl.ino = RemoteControl\RemoteControl.ino
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
