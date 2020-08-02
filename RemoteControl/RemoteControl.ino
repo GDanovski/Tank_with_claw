@@ -113,7 +113,7 @@ void CalcMotorSpeed(){
   M1_speed = M1_speed/2;
   
   if(M1_speed<1000){
-    M1_speed = 350;
+    M1_speed = 400;
   }
   
   if(M_speed_value+2 < (int)M1_speed || M_speed_value-2 > (int)M1_speed){

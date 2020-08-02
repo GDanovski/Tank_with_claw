@@ -59,19 +59,31 @@ const int Motor_freq = 500;
 const int resolution = 10;//max 1024
 //Borders
 const int M_min = 0;
+const int M_max = 1024;
+//Big tank
 
 const int S1_min = 30;
 const int S2_min = 75;
 const int S3_min = 60;
 const int S4_min = 30;
 
-const int M_max = 1024;
-
 const int S1_max = 125;
 const int S2_max = 120;
 const int S3_max = 110;
 const int S4_max = 100;
-    
+
+//Small Tank
+/*
+const int S1_min = 30;
+const int S2_min = 30;
+const int S3_min = 30;
+const int S4_min = 30;
+
+const int S1_max = 125;
+const int S2_max = 125;
+const int S3_max = 125;
+const int S4_max = 125;
+*/
 //Variables
 int MotorsStatus = 5;
 
