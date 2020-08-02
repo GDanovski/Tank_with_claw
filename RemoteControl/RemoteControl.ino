@@ -28,21 +28,6 @@ const int M1 = 33;
 const int M2 = 32;
 const int LED = 2;
 //values
-
-const double S1_min = 30;
-const double S2_min = 75;
-const double S3_min = 60;
-const double S4_min = 30;
-
-const double S1_max = 125;
-const double S2_max = 120;
-const double S3_max = 110;
-const double S4_max = 100;
-
-double S1_Const = 4095;
-double S2_Const = 4095;
-double S3_Const = 4095;
-double S4_Const = 4095;
 double M_Const = 4095;
 
 const double Potentiometer_Const = 4095;
@@ -61,12 +46,7 @@ int M2_value = 0;
 double currentValue = 0;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //my methods
-void Setup_Potentiometer(){
-  S1_Const = (S1_max-S1_min)/Potentiometer_Const;
-  S2_Const = (S2_max-S2_min)/Potentiometer_Const;
-  S3_Const = (S3_max-S3_min)/Potentiometer_Const;
-  S4_Const = (S4_max-S4_min)/Potentiometer_Const;
-  
+void Setup_Potentiometer(){   
   //configurate pins
   pinMode (S1, INPUT); 
   pinMode (S2, INPUT); 
@@ -78,15 +58,15 @@ void Setup_Potentiometer(){
   pinMode (LED, OUTPUT);
   digitalWrite(LED, LOW);  
 }
-int ReadPotentiometer(int Pin, double Const,double Min, int OldValue){
+int ReadPotentiometer(int Pin, int OldValue){
   // Reading potentiometer value
   currentValue = analogRead(Pin);  
-  currentValue = Min+(currentValue*Const);
+  currentValue = 100*(currentValue/Potentiometer_Const);
   
   if(OldValue+2 < (int)currentValue || OldValue-2 > (int)currentValue){
     OldValue = (int)currentValue;    
   }
-  
+    
   return OldValue;
 }
 int CheckMotorIndex(int M_value){
@@ -122,10 +102,10 @@ void CalcMotorSpeed(){
 }
 void MeasureValues(){
   //read analog values
-  S1_value = ReadPotentiometer(S1, S1_Const, S1_min, S1_value);
-  S2_value = ReadPotentiometer(S2, S2_Const, S2_min, S2_value);
-  S3_value = ReadPotentiometer(S3, S3_Const, S3_min, S3_value);
-  S4_value = ReadPotentiometer(S4, S4_Const, S4_min, S4_value);
+  S1_value = ReadPotentiometer(S1, S1_value);
+  S2_value = ReadPotentiometer(S2, S2_value);
+  S3_value = ReadPotentiometer(S3, S3_value);
+  S4_value = ReadPotentiometer(S4, S4_value);
  
   M1_value = analogRead(M1);
   M2_value = analogRead(M2);

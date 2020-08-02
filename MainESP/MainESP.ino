@@ -87,6 +87,11 @@ const int S4_max = 125;
 //Variables
 int MotorsStatus = 5;
 
+double S1_const = 0;
+double S2_const = 0;
+double S3_const = 0;
+double S4_const = 0;
+
 int S1_value = 0;
 int S2_value = 0;
 int S3_value = 0;
@@ -142,10 +147,16 @@ void ConfigChannels(){
    ledcWrite(S2_channel,  S2_value);
    ledcWrite(S3_channel,  S3_value);
    ledcWrite(S4_channel,  S4_value);
+
+   S1_const = ((double)(S1_max-S1_min))/100.0;
+   S2_const = ((double)(S2_max-S2_min))/100.0;
+   S3_const = ((double)(S3_max-S3_min))/100.0;
+   S4_const = ((double)(S4_max-S4_min))/100.0;
 }
 void DecodeInput(){
+  Serial1.println("Recieved: " + input);
   if(!CheckSizeOfInput()){ 
-    Serial1.println("Error: decoding!");   
+    Serial1.println("Error: decoding! " + input);   
     return;
   }
   // MotorsSpeed | MotorsStatus | Servo1 | Servo2 | Servo3|Servo4|
@@ -179,6 +190,8 @@ void DecodeInput(){
               break;
             case 2:
               //S1
+              curValue = S1_const*curValue + S1_min;
+              
               if(curValue != S1_value){
               if(curValue<S1_min){
                 S1_value=S1_min;
@@ -194,6 +207,8 @@ void DecodeInput(){
               break;
             case 3:
               //S2
+              curValue = S2_const*curValue + S2_min;
+              
               if(curValue != S2_value){
               if(curValue<S2_min){
                 S2_value=S2_min;
@@ -209,6 +224,8 @@ void DecodeInput(){
               break;
             case 4:
               //S3
+              curValue = S3_const*curValue + S3_min;
+              
               if(curValue != S3_value){
               if(curValue<S3_min){
                 S3_value=S3_min;
@@ -224,6 +241,7 @@ void DecodeInput(){
               break;
             case 5:
               //S4     
+              curValue = S4_const*curValue + S4_min;
               if(curValue != S4_value ){         
               if(curValue<S4_min){
                 S4_value=S4_min;
