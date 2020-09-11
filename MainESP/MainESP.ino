@@ -59,9 +59,9 @@ const int Motor_freq = 500;
 const int resolution = 10;//max 1024
 //Borders
 const int M_min = 0;
-const int M_max = 1024;
+const int M_max = 600;
 //Big tank
-
+/*
 const int S1_min = 30;
 const int S2_min = 75;
 const int S3_min = 60;
@@ -71,9 +71,9 @@ const int S1_max = 125;
 const int S2_max = 120;
 const int S3_max = 110;
 const int S4_max = 100;
-
+*/
 //Small Tank
-/*
+
 const int S1_min = 30;
 const int S2_min = 30;
 const int S3_min = 30;
@@ -83,7 +83,7 @@ const int S1_max = 125;
 const int S2_max = 125;
 const int S3_max = 125;
 const int S4_max = 125;
-*/
+
 //Variables
 int MotorsStatus = 5;
 
@@ -178,14 +178,15 @@ void DecodeInput(){
                 if(M_speed>M_max){
                   M_speed = M_max;
                 }
-                SetMotors();
+               // SetMotors();
               }
               break;
             case 1:
             //MotorsStatus
               if(MotorsStatus!=curValue){
                 MotorsStatus = curValue;
-                SetMotors();
+                //SetMotors();
+                SetmotorsGently();
               }
               break;
             case 2:
@@ -266,6 +267,23 @@ void DecodeInput(){
    //clear
    current = "";
     ind = 0;
+}
+void SetmotorsGently(){
+  if(M_speed == M_max){
+    for(M_speed = 150; M_speed<=450; M_speed+=10){
+      SetMotors();
+      delay(40);
+    }
+  }
+  else if(M_speed == 0){
+    SetMotors();
+  }
+  else{
+    for(M_speed = 150; M_speed<=250; M_speed+=10){
+      SetMotors();
+      delay(30);
+    }
+  }
 }
 void SetMotors(){
   switch(MotorsStatus){
